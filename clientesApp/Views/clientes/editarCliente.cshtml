@@ -1,0 +1,51 @@
+﻿@model clientesApp.Models.viewModels.clientesViewModel
+
+@{
+    ViewBag.Title = "Modificar Cliente";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("editarCliente", "clientes", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                @Html.HiddenFor(d => d.codCliente)
+                @Html.LabelFor(d => d.nombreCliente)
+                @Html.TextBoxFor(d => d.nombreCliente, "", new { @class = "form-control", @style = "text-transform:uppercase" })
+                @Html.ValidationMessageFor(d => d.nombreCliente, null, new { @class = "danger" })
+            </div>
+
+            <div class="form-group col-lg-12">
+                @Html.LabelFor(d => d.duiCliente)
+                @Html.TextBoxFor(d => d.duiCliente, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.duiCliente, null, new { @class = "danger" })
+            </div>
+            <div class="form-group col-lg-12">
+                @Html.LabelFor(d => d.correoCliente)
+                @Html.TextBoxFor(d => d.correoCliente, "", new { @class = "form-control", @style = "text-transform:lowercase" })
+                @Html.ValidationMessageFor(d => d.correoCliente, null, new { @class = "danger" })
+            </div>
+            <div class="form-group col-lg-12">
+                @Html.LabelFor(d => d.telefonoCliente)
+                @Html.TextBoxFor(d => d.telefonoCliente, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.telefonoCliente, null, new { @class = "danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-12" style="text-align:right;">
+                <a href="~/clientes/" class="btn btn-warning btn-sm">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                    Cancelar
+                </a>
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                    Modificar
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+}

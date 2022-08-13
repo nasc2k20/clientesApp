@@ -1,0 +1,64 @@
+﻿@model List<clientesApp.Models.viewModels.listaClientesViewModel>
+@{
+    ViewBag.Title = "Listado Clientes";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="container">
+    <div class="d-flex bd-highlight">
+        <div class="p-2 w-100 bd-highlight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group mr-2 col-6" role="group" aria-label="First group">
+                            <input type="text" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                        </div>
+                        <div class="btn-group mr-2" role="group" aria-label="Second group">
+                            <button type="button" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-2 flex-shrink-1 bd-highlight">
+            <a href="~/clientes/nuevoCliente" class="btn btn-success btn-sm"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+        </div>
+    </div>
+
+    <div style="height: 10px"></div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-hover table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th width="5%">ID</th>
+                        <th width="35%">NOMBRE DEL CLIENTE</th>
+                        <th width="15%">DUI DEL CLIENTE</th>
+                        <th width="15%">TELEFONO</th>
+                        <th width="20%">CORREO</th>
+                        <th width="5%" colspan="2">ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int i = 1;
+                        foreach (var dcliente in Model)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>@dcliente.nombreCliente</td>
+                                <td>@dcliente.duiCliente</td>
+                                <td>@dcliente.telefonoCliente</td>
+                                <td>@dcliente.correoCliente</td>
+                                <td><a href="~/clientes/editarCliente/@dcliente.codCliente" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                                <td><a href="~/clientes/eliminarCliente/@dcliente.codCliente" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

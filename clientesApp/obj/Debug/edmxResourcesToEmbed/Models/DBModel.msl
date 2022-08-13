@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="clientesDBModelStoreContainer" CdmEntityContainer="clientesDBEntities">
+    <EntitySetMapping Name="clientes">
+      <EntityTypeMapping TypeName="clientesDBModel.clientes">
+        <MappingFragment StoreEntitySet="clientes">
+          <ScalarProperty Name="codCliente" ColumnName="codCliente" />
+          <ScalarProperty Name="nombreCliente" ColumnName="nombreCliente" />
+          <ScalarProperty Name="telefonoCliente" ColumnName="telefonoCliente" />
+          <ScalarProperty Name="duiCliente" ColumnName="duiCliente" />
+          <ScalarProperty Name="correoCliente" ColumnName="correoCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="historicoEdiciones">
+      <EntityTypeMapping TypeName="clientesDBModel.historicoEdiciones">
+        <MappingFragment StoreEntitySet="historicoEdiciones">
+          <ScalarProperty Name="codHistEdit" ColumnName="codHistEdit" />
+          <ScalarProperty Name="codCliente" ColumnName="codCliente" />
+          <ScalarProperty Name="fechaEdicion" ColumnName="fechaEdicion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

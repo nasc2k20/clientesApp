@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="clientesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="clientes">
+    <Key>
+      <PropertyRef Name="codCliente" />
+    </Key>
+    <Property Name="codCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telefonoCliente" Type="Int32" Nullable="false" />
+    <Property Name="duiCliente" Type="Int32" Nullable="false" />
+    <Property Name="correoCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="historicoEdiciones" Relationship="Self.fk_clientesHist" FromRole="clientes" ToRole="historicoEdiciones" />
+  </EntityType>
+  <EntityType Name="historicoEdiciones">
+    <Key>
+      <PropertyRef Name="codHistEdit" />
+    </Key>
+    <Property Name="codHistEdit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codCliente" Type="Int32" Nullable="false" />
+    <Property Name="fechaEdicion" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="clientes" Relationship="Self.fk_clientesHist" FromRole="historicoEdiciones" ToRole="clientes" />
+  </EntityType>
+  <Association Name="fk_clientesHist">
+    <End Role="clientes" Type="Self.clientes" Multiplicity="1" />
+    <End Role="historicoEdiciones" Type="Self.historicoEdiciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="codCliente" />
+      </Principal>
+      <Dependent Role="historicoEdiciones">
+        <PropertyRef Name="codCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="clientesDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="clientes" EntityType="Self.clientes" />
+    <EntitySet Name="historicoEdiciones" EntityType="Self.historicoEdiciones" />
+    <AssociationSet Name="fk_clientesHist" Association="Self.fk_clientesHist">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="historicoEdiciones" EntitySet="historicoEdiciones" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="clientesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="clientes">
+          <Key>
+            <PropertyRef Name="codCliente" />
+          </Key>
+          <Property Name="codCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreCliente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefonoCliente" Type="int" Nullable="false" />
+          <Property Name="duiCliente" Type="int" Nullable="false" />
+          <Property Name="correoCliente" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="historicoEdiciones">
+          <Key>
+            <PropertyRef Name="codHistEdit" />
+          </Key>
+          <Property Name="codHistEdit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codCliente" Type="int" Nullable="false" />
+          <Property Name="fechaEdicion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_clientesHist">
+          <End Role="clientes" Type="Self.clientes" Multiplicity="1" />
+          <End Role="historicoEdiciones" Type="Self.historicoEdiciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientes">
+              <PropertyRef Name="codCliente" />
+            </Principal>
+            <Dependent Role="historicoEdiciones">
+              <PropertyRef Name="codCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="clientesDBModelStoreContainer">
+          <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="historicoEdiciones" EntityType="Self.historicoEdiciones" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_clientesHist" Association="Self.fk_clientesHist">
+            <End Role="clientes" EntitySet="clientes" />
+            <End Role="historicoEdiciones" EntitySet="historicoEdiciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="clientesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="clientes">
+          <Key>
+            <PropertyRef Name="codCliente" />
+          </Key>
+          <Property Name="codCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefonoCliente" Type="Int32" Nullable="false" />
+          <Property Name="duiCliente" Type="Int32" Nullable="false" />
+          <Property Name="correoCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="historicoEdiciones" Relationship="Self.fk_clientesHist" FromRole="clientes" ToRole="historicoEdiciones" />
+        </EntityType>
+        <EntityType Name="historicoEdiciones">
+          <Key>
+            <PropertyRef Name="codHistEdit" />
+          </Key>
+          <Property Name="codHistEdit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codCliente" Type="Int32" Nullable="false" />
+          <Property Name="fechaEdicion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="clientes" Relationship="Self.fk_clientesHist" FromRole="historicoEdiciones" ToRole="clientes" />
+        </EntityType>
+        <Association Name="fk_clientesHist">
+          <End Role="clientes" Type="Self.clientes" Multiplicity="1" />
+          <End Role="historicoEdiciones" Type="Self.historicoEdiciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientes">
+              <PropertyRef Name="codCliente" />
+            </Principal>
+            <Dependent Role="historicoEdiciones">
+              <PropertyRef Name="codCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="clientesDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="clientes" EntityType="Self.clientes" />
+          <EntitySet Name="historicoEdiciones" EntityType="Self.historicoEdiciones" />
+          <AssociationSet Name="fk_clientesHist" Association="Self.fk_clientesHist">
+            <End Role="clientes" EntitySet="clientes" />
+            <End Role="historicoEdiciones" EntitySet="historicoEdiciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="clientesDBModelStoreContainer" CdmEntityContainer="clientesDBEntities">
+          <EntitySetMapping Name="clientes">
+            <EntityTypeMapping TypeName="clientesDBModel.clientes">
+              <MappingFragment StoreEntitySet="clientes">
+                <ScalarProperty Name="codCliente" ColumnName="codCliente" />
+                <ScalarProperty Name="nombreCliente" ColumnName="nombreCliente" />
+                <ScalarProperty Name="telefonoCliente" ColumnName="telefonoCliente" />
+                <ScalarProperty Name="duiCliente" ColumnName="duiCliente" />
+                <ScalarProperty Name="correoCliente" ColumnName="correoCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="historicoEdiciones">
+            <EntityTypeMapping TypeName="clientesDBModel.historicoEdiciones">
+              <MappingFragment StoreEntitySet="historicoEdiciones">
+                <ScalarProperty Name="codHistEdit" ColumnName="codHistEdit" />
+                <ScalarProperty Name="codCliente" ColumnName="codCliente" />
+                <ScalarProperty Name="fechaEdicion" ColumnName="fechaEdicion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
